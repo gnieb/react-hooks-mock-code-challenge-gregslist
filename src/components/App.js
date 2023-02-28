@@ -4,9 +4,7 @@ import ListingsContainer from "./ListingsContainer";
 
 function App() {
 const [listings, setListings] = useState ([])
-const removeListingFromState = (doomedListing) => {
-  setListings( [...listings].remove(doomedListing))
-}
+
 
 useEffect(() => {
   fetch("http://localhost:6001/listings")
@@ -16,6 +14,10 @@ useEffect(() => {
   })
 }, ([]))
 
+const removeListingFromState = (doomedListing) => {
+  const updatedListings = listings.filter((listing) => listing.id !== doomedListing.id);
+  setListings(updatedListings);
+}
 
   return (
     <div className="app">

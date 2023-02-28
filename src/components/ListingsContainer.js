@@ -6,7 +6,9 @@ function ListingsContainer({listings, removeListingFromState}) {
   const displayListing = listings.map(listing => {
       return (
         <ListingCard 
-        {...listing} key={listing.id} 
+        {...listing} 
+        listing={listing}
+        key={listing.id} 
         removeListingFromState={removeListingFromState} />
       )
     })

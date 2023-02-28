@@ -1,19 +1,18 @@
 import React, {useState} from "react";
 
-function ListingCard({image, description, location, id, removeListingFromState}) {
+function ListingCard({image, description, location, id, removeListingFromState, listing}) {
 const [isActive, setIsActive] = useState(false)
 
 function handleActive () {
   setIsActive(isActive => !isActive)
 }
 
-function handleDelete (e) {
+function handleDelete () {
   fetch(`http://localhost:6001/listings/${id}`, {
     method: "DELETE",
   })
   .then(r => r.json())
-  removeListingFromState(id)
-  // e.target.id.remove()
+  .then(() => removeListingFromState(listing))
 }
 
   return (
