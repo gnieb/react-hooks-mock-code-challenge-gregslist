@@ -3,7 +3,8 @@ import Header from "./Header";
 import ListingsContainer from "./ListingsContainer";
 
 function App() {
-const [listings, setListings] = useState ([])
+const [listings, setListings] = useState ([]);
+const [searchString, setSearchString] = useState('')
 
 
 useEffect(() => {
@@ -19,24 +20,22 @@ const removeListingFromState = (doomedListing) => {
   setListings(updatedListings);
 }
 
-function handleSearch(searchInput) {
-  
-  const updatedListings = listings.filter((listing) => {
-  if (listing.description.toLowerCase().includes(searchInput.toLowerCase())) {
+function handleSearch(aNewString) {
+setSearchString(aNewString.toLowerCase())
+}
+const searchedListings = listings.filter (listingObj => {
+  if (listingObj.description.toLowerCase().includes (searchString)) {
     return true
-  } else {
-    return false
   }
-}
-);
-  setListings(updatedListings);
-}
+})
+  
+ 
 
   return (
     <div className="app">
       <Header handleSearch={handleSearch}/>
       <ListingsContainer removeListingFromState= {removeListingFromState} 
-      listings={listings}/>
+      listings={searchedListings}/>
     </div>
   );
 }
