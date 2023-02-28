@@ -19,9 +19,22 @@ const removeListingFromState = (doomedListing) => {
   setListings(updatedListings);
 }
 
+function handleSearch(searchInput) {
+  
+  const updatedListings = listings.filter((listing) => {
+  if (listing.description.toLowerCase().includes(searchInput.toLowerCase())) {
+    return true
+  } else {
+    return false
+  }
+}
+);
+  setListings(updatedListings);
+}
+
   return (
     <div className="app">
-      <Header />
+      <Header handleSearch={handleSearch}/>
       <ListingsContainer removeListingFromState= {removeListingFromState} 
       listings={listings}/>
     </div>
